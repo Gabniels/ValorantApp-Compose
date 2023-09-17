@@ -1,5 +1,6 @@
 package com.gabniel.valorantapp_compose.presenter.screen.home
 
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -14,12 +15,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.gabniel.valorantapp_compose.presenter.component.LoadingIcon
+import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentCard
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentPager
 
 @Composable
@@ -50,7 +56,7 @@ fun HomeContent(
                 AgentPager(
                     modifier = Modifier.fillMaxSize(),
                     listState = rememberPagerState(),
-                    items = state.agents
+                    items = state.agents,
                 )
             }
         }
