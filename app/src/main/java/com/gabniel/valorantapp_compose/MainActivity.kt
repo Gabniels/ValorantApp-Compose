@@ -6,23 +6,23 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.gabniel.valorantapp_compose.ui.theme.ValorantAppComposeTheme
+import com.gabniel.valorantapp_compose.presenter.screen.home.HomeScreen
+import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            ValorantAppComposeTheme {
-                // A surface container using the 'background' color from the theme
+            ValorantAppComposeTheme(darkTheme = false) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    MainContent()
                 }
             }
         }
@@ -30,17 +30,6 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    ValorantAppComposeTheme {
-        Greeting("Android")
-    }
+fun MainContent() {
+    HomeScreen()
 }

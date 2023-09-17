@@ -1,4 +1,4 @@
-package com.gabniel.valorantapp_compose.ui.theme
+package com.gabniel.valorantapp_compose.presenter.ui.theme
 
 import android.app.Activity
 import android.os.Build
