@@ -98,10 +98,8 @@ fun AgentPager(
                     contentDescription = "agent image",
                     contentScale = ContentScale.FillHeight
                 )
-                if (clicked) {
-                    AgentCard(item = items[index])
-                } else {
-                }
+                AgentCard(item = items[index], clicked)
+
             }
         }
     }
