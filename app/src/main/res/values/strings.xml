@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ValorantApp-Compose</string>
+    <string name="favorite_is_empty">Your favorite is empty, let\'s get added</string>
 </resources>

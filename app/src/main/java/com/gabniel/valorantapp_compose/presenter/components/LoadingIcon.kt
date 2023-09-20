@@ -1,4 +1,4 @@
-package com.gabniel.valorantapp_compose.presenter.component
+package com.gabniel.valorantapp_compose.presenter.components
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.core.RepeatMode

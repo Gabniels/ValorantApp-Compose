@@ -1,10 +1,8 @@
 package com.gabniel.valorantapp_compose.presenter.screen.home
 
-import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.rememberPagerState
@@ -13,20 +11,23 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.gabniel.valorantapp_compose.presenter.component.LoadingIcon
-import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentCard
+import com.gabniel.valorantapp_compose.presenter.components.LoadingIcon
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentPager
+import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteDialog
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeScreen() {
@@ -41,6 +42,17 @@ fun HomeScreen() {
 fun HomeContent(
     state: HomeUiState,
 ) {
+
+    val coroutineScope = rememberCoroutineScope()
+    var stateFavorite by remember { mutableStateOf(false) }
+
+    LaunchedEffect(key1 = true) {
+        coroutineScope.launch {
+            delay(2000)
+            stateFavorite = true
+        }
+    }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
     ) { contentPadding ->
@@ -48,7 +60,7 @@ fun HomeContent(
             LoadingIcon()
         }
         if (!state.isLoading && state.agents.isNotEmpty()) {
-            Column(
+            Box(
                 modifier = Modifier
                     .padding(contentPadding)
                     .background(MaterialTheme.colorScheme.primary)
@@ -58,6 +70,7 @@ fun HomeContent(
                     listState = rememberPagerState(),
                     items = state.agents,
                 )
+                FavoriteDialog(stateFavorite)
             }
         }
         if (!state.isLoading && !state.isError) {
