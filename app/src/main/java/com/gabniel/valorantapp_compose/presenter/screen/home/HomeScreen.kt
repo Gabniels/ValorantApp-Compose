@@ -12,7 +12,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -22,33 +21,24 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.gabniel.valorantapp_compose.presenter.components.LoadingIcon
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentPager
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteDialog
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-@Composable
-fun HomeScreen() {
-    val viewModel: HomeViewModel = hiltViewModel()
-    val state by viewModel.uiState.collectAsState()
-
-    HomeContent(state = state)
-}
-
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
-fun HomeContent(
+fun HomeScreen(
     state: HomeUiState,
+    navigateToFavorite: () -> Unit,
 ) {
-
     val coroutineScope = rememberCoroutineScope()
     var stateFavorite by remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = true) {
         coroutineScope.launch {
-            delay(2000)
+            delay(1500)
             stateFavorite = true
         }
     }
@@ -70,7 +60,12 @@ fun HomeContent(
                     listState = rememberPagerState(),
                     items = state.agents,
                 )
-                FavoriteDialog(stateFavorite)
+                FavoriteDialog(
+                    isVisible = stateFavorite,
+                    navigateToFavorite = {
+                        navigateToFavorite()
+                    }
+                )
             }
         }
         if (!state.isLoading && !state.isError) {

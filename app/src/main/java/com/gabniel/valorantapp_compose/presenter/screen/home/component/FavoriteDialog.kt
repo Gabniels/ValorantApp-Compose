@@ -1,5 +1,6 @@
 package com.gabniel.valorantapp_compose.presenter.screen.home.component
 
+import android.content.res.Configuration
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -8,6 +9,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -32,19 +34,32 @@ import com.gabniel.valorantapp_compose.R
 import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 
 @Composable
-fun FavoriteDialog(isVisible: Boolean) {
-    FavoriteDialogContent(isVisible = isVisible)
+fun FavoriteDialog(
+    isVisible: Boolean,
+    navigateToFavorite: () -> Unit,
+) {
+    FavoriteDialogContent(
+        isVisible = isVisible,
+        navigateToFavorite = { navigateToFavorite() }
+    )
 }
 
 @Composable
-fun FavoriteDialogContent(isVisible: Boolean) {
+fun FavoriteDialogContent(
+    isVisible: Boolean,
+    navigateToFavorite: () -> Unit,
+) {
     AnimatedVisibility(
         visible = isVisible,
         enter = fadeIn(animationSpec = tween(durationMillis = 1000)) + slideInVertically(),
         exit = fadeOut(animationSpec = tween(durationMillis = 1000)) + slideOutVertically()
     ) {
         Card(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier
+                .padding(16.dp)
+                .clickable {
+                    navigateToFavorite()
+                },
             colors = CardDefaults.cardColors(
                 containerColor = Color(0xFF272727).copy(alpha = 0.5f)
             )
@@ -58,12 +73,12 @@ fun FavoriteDialogContent(isVisible: Boolean) {
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.valorant_logo),
-                    contentDescription = "Logo Image",
+                    contentDescription = "logo image",
                     modifier = Modifier
                         .size(50.dp)
                         .border(
                             width = 2.dp,
-                            color = Color(0xFFFF8CB2).copy(alpha = 0.8f),
+                            color = Color(0xFFFF8C8C).copy(alpha = 0.8f),
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
@@ -81,9 +96,10 @@ fun FavoriteDialogContent(isVisible: Boolean) {
 }
 
 @Preview(showBackground = true)
+@Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
 fun favoriteDialogPreview() {
     ValorantAppComposeTheme {
-        FavoriteDialogContent(true)
+        FavoriteDialogContent(true, {})
     }
 }

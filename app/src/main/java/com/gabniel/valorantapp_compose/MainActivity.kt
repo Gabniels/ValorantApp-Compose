@@ -6,9 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.gabniel.valorantapp_compose.presenter.screen.home.HomeScreen
+import androidx.navigation.compose.rememberNavController
+import com.gabniel.valorantapp_compose.presenter.navigation.AppNavigation
 import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,16 +20,12 @@ class MainActivity : ComponentActivity() {
             ValorantAppComposeTheme(darkTheme = false) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
+                    color = MaterialTheme.colorScheme.primary
                 ) {
-                    MainContent()
+                    val navController = rememberNavController()
+                    AppNavigation(navHostController = navController)
                 }
             }
         }
     }
-}
-
-@Composable
-fun MainContent() {
-    HomeScreen()
 }
