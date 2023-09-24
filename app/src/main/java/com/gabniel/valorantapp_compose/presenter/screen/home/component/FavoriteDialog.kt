@@ -67,8 +67,8 @@ fun FavoriteDialogContent(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.Center,
+                    .padding(8.dp),
+                horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
@@ -83,10 +83,10 @@ fun FavoriteDialogContent(
                         )
                         .padding(8.dp)
                 )
-                Spacer(modifier = Modifier.width(16.dp))
+                Spacer(modifier = Modifier.width(8.dp))
                 Text(
                     text = stringResource(R.string.favorite_is_empty),
-                    style = MaterialTheme.typography.bodyMedium.copy(
+                    style = MaterialTheme.typography.bodySmall.copy(
                         color = Color.White
                     )
                 )
