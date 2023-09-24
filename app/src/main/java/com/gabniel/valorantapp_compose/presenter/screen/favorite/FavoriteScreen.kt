@@ -59,7 +59,6 @@ fun FavoriteContent(
     }
 }
 
-// test
 @Preview
 @Composable
 fun FavoritePreview() {
