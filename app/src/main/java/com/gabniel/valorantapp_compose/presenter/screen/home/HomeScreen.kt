@@ -15,6 +15,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,6 +25,7 @@ import com.gabniel.valorantapp_compose.presenter.components.LoadingIcon
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentPager
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteDialog
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
@@ -31,11 +33,14 @@ fun HomeScreen(
     state: HomeUiState,
     navigateToFavorite: () -> Unit,
 ) {
+    val coroutineScope = rememberCoroutineScope()
     var stateFavorite by remember { mutableStateOf(false) }
 
-    LaunchedEffect(key1 = Unit) {
-        delay(500)
-        stateFavorite = true
+    LaunchedEffect(key1 = true) {
+        coroutineScope.launch {
+            delay(1500)
+            stateFavorite = true
+        }
     }
 
     Scaffold(
@@ -57,7 +62,6 @@ fun HomeScreen(
                 )
                 FavoriteDialog(
                     isVisible = stateFavorite,
-                    items = emptyList(),
                     navigateToFavorite = {
                         navigateToFavorite()
                     }
