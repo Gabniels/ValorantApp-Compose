@@ -28,8 +28,6 @@ fun FavoriteScreen(
     FavoriteContent(navigateBack)
 }
 
-// test
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteContent(
