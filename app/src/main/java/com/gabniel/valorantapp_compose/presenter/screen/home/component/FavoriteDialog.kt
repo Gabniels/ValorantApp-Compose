@@ -31,15 +31,18 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gabniel.valorantapp_compose.R
+import com.gabniel.valorantapp_compose.data.network.AgentModel
 import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 
 @Composable
 fun FavoriteDialog(
     isVisible: Boolean,
     navigateToFavorite: () -> Unit,
+    items: List<AgentModel>,
 ) {
     FavoriteDialogContent(
         isVisible = isVisible,
+        items = items,
         navigateToFavorite = { navigateToFavorite() }
     )
 }
@@ -47,6 +50,7 @@ fun FavoriteDialog(
 @Composable
 fun FavoriteDialogContent(
     isVisible: Boolean,
+    items: List<AgentModel>,
     navigateToFavorite: () -> Unit,
 ) {
     AnimatedVisibility(
@@ -68,25 +72,26 @@ fun FavoriteDialogContent(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
-                horizontalArrangement = Arrangement.Center,
+                horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.valorant_logo),
                     contentDescription = "logo image",
                     modifier = Modifier
-                        .size(50.dp)
+                        .size(35.dp)
                         .border(
                             width = 2.dp,
                             color = Color(0xFFFF8C8C).copy(alpha = 0.8f),
                             shape = RoundedCornerShape(8.dp)
                         )
-                        .padding(8.dp)
+                        .padding(6.dp)
                 )
                 Spacer(modifier = Modifier.width(16.dp))
                 Text(
-                    text = stringResource(R.string.favorite_is_empty),
-                    style = MaterialTheme.typography.bodyMedium.copy(
+                    text = if (items.isNotEmpty()) stringResource(R.string.favorite_is_here)
+                    else stringResource(R.string.favorite_is_empty),
+                    style = MaterialTheme.typography.bodySmall.copy(
                         color = Color.White
                     )
                 )
@@ -98,8 +103,8 @@ fun FavoriteDialogContent(
 @Preview(showBackground = true)
 @Preview(showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun favoriteDialogPreview() {
+fun FavoriteDialogPreview() {
     ValorantAppComposeTheme {
-        FavoriteDialogContent(true, {})
+        FavoriteDialogContent(true, emptyList(), {})
     }
 }
