@@ -3,7 +3,11 @@ package com.gabniel.valorantapp_compose.presenter.screen.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gabniel.valorantapp_compose.data.Resource
+import com.gabniel.valorantapp_compose.data.db.entity.FavoriteAgentEntity
+import com.gabniel.valorantapp_compose.data.network.AgentEntity
+import com.gabniel.valorantapp_compose.data.network.AgentModel
 import com.gabniel.valorantapp_compose.domain.usecase.AgentUseCase
+import com.gabniel.valorantapp_compose.domain.usecase.FavoriteAgentUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,6 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val agentUseCase: AgentUseCase,
+    private val favoriteAgentUserCase: FavoriteAgentUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(HomeUiState())
@@ -36,6 +41,7 @@ class HomeViewModel @Inject constructor(
                             )
                         }
                     }
+
                     is Resource.Error -> {
                         _uiState.update { state ->
                             state.copy(
@@ -46,6 +52,7 @@ class HomeViewModel @Inject constructor(
                             )
                         }
                     }
+
                     is Resource.Loading -> {
                         _uiState.update { state ->
                             state.copy(
@@ -57,6 +64,12 @@ class HomeViewModel @Inject constructor(
                     }
                 }
             }
+        }
+    }
+
+    fun insertFavoriteAgent(agent: FavoriteAgentEntity) {
+        viewModelScope.launch {
+          favoriteAgentUserCase.insertFavoriteAgent.invoke(agent)
         }
     }
 }

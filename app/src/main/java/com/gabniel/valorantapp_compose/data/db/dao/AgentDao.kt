@@ -1,4 +1,4 @@
-package com.gabniel.valorantapp_compose.data.db
+package com.gabniel.valorantapp_compose.data.db.dao
 
 import androidx.room.Dao
 import androidx.room.Insert

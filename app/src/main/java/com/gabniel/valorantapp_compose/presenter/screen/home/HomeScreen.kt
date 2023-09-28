@@ -29,6 +29,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun HomeScreen(
     state: HomeUiState,
+    viewModel: HomeViewModel,
     navigateToFavorite: () -> Unit,
 ) {
     var stateFavorite by remember { mutableStateOf(false) }
@@ -54,6 +55,7 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxSize(),
                     listState = rememberPagerState(),
                     items = state.agents,
+                    viewModel = viewModel
                 )
                 FavoriteDialog(
                     isVisible = stateFavorite,

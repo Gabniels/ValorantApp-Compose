@@ -34,7 +34,6 @@ data class AgentModel(
     val displayIcon: String?,
     val fullPortrait: String?,
     val background: String?,
-    val backgroundGradientColors: List<String>?,
 )
 
 @Entity(tableName = "agent")
@@ -59,7 +58,6 @@ data class AgentEntity(
                     displayIcon = it.displayIcon,
                     fullPortrait = it.fullPortrait,
                     background = it.background,
-                    backgroundGradientColors = emptyList()
                 )
                 agentList.add(agent)
             }

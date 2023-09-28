@@ -22,7 +22,7 @@ fun AppNavigation(
         composable(route = Routes.Home.route) {
             val viewModel: HomeViewModel = hiltViewModel()
             val state by viewModel.uiState.collectAsState()
-            HomeScreen(state = state) {
+            HomeScreen(state = state, viewModel = viewModel) {
                 navHostController.navigate(Routes.Favorite.route)
             }
         }

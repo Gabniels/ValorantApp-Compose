@@ -3,6 +3,7 @@ package com.gabniel.valorantapp_compose.domain.repository
 import com.gabniel.valorantapp_compose.data.NetworkBoundResource
 import com.gabniel.valorantapp_compose.data.Resource
 import com.gabniel.valorantapp_compose.data.db.LocalDataSource
+import com.gabniel.valorantapp_compose.data.db.entity.FavoriteAgentEntity
 import com.gabniel.valorantapp_compose.data.network.AgentEntity
 import com.gabniel.valorantapp_compose.data.network.AgentModel
 import com.gabniel.valorantapp_compose.data.network.AgentResponse
@@ -37,4 +38,14 @@ class AgentRepositoryImpl @Inject constructor(
                 return true
             }
         }.asFlow()
+
+    override suspend fun insertFavoriteAgent(agent: FavoriteAgentEntity) {
+       return localDataSource.insertFavoriteAgent(agent)
+    }
+
+    override fun getAllFavoriteAgent(): Flow<List<FavoriteAgentEntity>> {
+        return localDataSource.getAllFavoriteAgent()
+    }
+
+
 }

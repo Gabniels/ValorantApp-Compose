@@ -28,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.data.network.AgentModel
+import com.gabniel.valorantapp_compose.presenter.screen.home.HomeViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -35,6 +36,7 @@ fun AgentPager(
     modifier: Modifier,
     listState: PagerState,
     items: List<AgentModel>,
+    viewModel: HomeViewModel,
 ) {
     VerticalPager(
         modifier = modifier,
@@ -96,7 +98,7 @@ fun AgentPager(
                     contentDescription = "agent image",
                     contentScale = ContentScale.FillHeight
                 )
-                AgentCard(item = items[index], isVisible = clicked)
+                AgentCard(item = items[index], isVisible = clicked, viewModel = viewModel)
             }
         }
     }
