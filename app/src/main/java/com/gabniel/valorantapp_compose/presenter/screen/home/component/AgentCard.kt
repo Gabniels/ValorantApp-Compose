@@ -78,7 +78,7 @@ fun AgentCard(
                             .clickable {
 //                                viewModel.insertFavoriteAgent(item)
 //                                viewModel.insertFavoriteAgent(FavoriteAgentEntity.transformToAgentModel(item))
-                                Log.d("gabniel-fav", "AgentCard: Add to Favorite")
+                                Log.d("gabniel-fav", "AgentCard: Add to Favorite ")
                             }
                     )
                 }
