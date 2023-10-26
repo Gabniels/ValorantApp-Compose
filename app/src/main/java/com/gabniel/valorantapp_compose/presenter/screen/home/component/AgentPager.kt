@@ -15,6 +15,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.PagerState
 import androidx.compose.foundation.pager.VerticalPager
+import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,9 +28,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.data.network.AgentModel
+import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -68,7 +73,7 @@ fun AgentPager(
         ) {
             AsyncImage(
                 model = "${items[index].background}",
-                contentDescription = "",
+                contentDescription = "image background",
                 contentScale = ContentScale.Fit,
                 modifier = Modifier
                     .fillMaxSize()
@@ -81,23 +86,43 @@ fun AgentPager(
             Box(
                 modifier = Modifier
                     .fillMaxSize()
+                    .clickable {
+                        clicked = !clicked
+                    }
                     .graphicsLayer(
                         scaleX = boxSize,
                         scaleY = boxSize
                     )
-                    .padding(16.dp)
-                    .clickable {
-                        clicked = !clicked
-                    },
+                    .padding(16.dp),
                 contentAlignment = Alignment.Center
             ) {
                 AsyncImage(
                     model = "${items[index].fullPortrait}",
-                    contentDescription = "agent image",
+                    contentDescription = "image agent",
                     contentScale = ContentScale.FillHeight
                 )
                 AgentCard(item = items[index], isVisible = clicked)
             }
+        }
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Preview(showBackground = true)
+@Composable
+fun AgentPagerPreview() {
+    ValorantAppComposeTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.primary
+        ) {
+            AgentPager(
+                modifier = Modifier.fillMaxSize(),
+                listState = rememberPagerState(),
+                items = listOf(
+                    AgentModel("1", "Jetpack Compose", "Jetpack Compose", "", "", "", emptyList())
+                )
+            )
         }
     }
 }

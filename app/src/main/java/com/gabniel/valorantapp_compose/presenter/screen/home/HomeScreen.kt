@@ -9,6 +9,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -19,10 +20,12 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.gabniel.valorantapp_compose.presenter.components.LoadingIcon
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentPager
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteDialog
+import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -76,6 +79,22 @@ fun HomeScreen(
                     )
                 )
             }
+        }
+    }
+}
+
+@Preview
+@Composable
+fun HomePreview() {
+    ValorantAppComposeTheme {
+        Surface(
+            modifier = Modifier.fillMaxSize(),
+            color = MaterialTheme.colorScheme.primary
+        ) {
+            HomeScreen(
+                state = HomeUiState(),
+                navigateToFavorite = {},
+            )
         }
     }
 }
