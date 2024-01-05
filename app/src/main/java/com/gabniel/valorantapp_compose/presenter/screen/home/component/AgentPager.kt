@@ -120,7 +120,15 @@ fun AgentPagerPreview() {
                 modifier = Modifier.fillMaxSize(),
                 listState = rememberPagerState(),
                 items = listOf(
-                    AgentModel("1", "Jetpack Compose", "Jetpack Compose", "", "", "", emptyList())
+                    AgentModel(
+                        uuid = "1",
+                        displayName = "Jetpack Compose",
+                        description = "Jetpack Compose",
+                        displayIcon = "",
+                        fullPortrait = "",
+                        background = "",
+                        emptyList()
+                    )
                 )
             )
         }

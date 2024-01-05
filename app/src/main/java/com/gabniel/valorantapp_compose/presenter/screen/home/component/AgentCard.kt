@@ -25,10 +25,12 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.R
 import com.gabniel.valorantapp_compose.data.network.AgentModel
+import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 
 @Composable
 fun AgentCard(
@@ -82,5 +84,23 @@ fun AgentCard(
                 )
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun AgentCardPreview() {
+    ValorantAppComposeTheme {
+        AgentCard(
+            item = AgentModel(
+                uuid = "",
+                displayName = "Jetpack Compose",
+                description = "Jetpack Compose is ...",
+                displayIcon = null,
+                fullPortrait = null,
+                background = "",
+                emptyList()
+            ), isVisible = true
+        )
     }
 }

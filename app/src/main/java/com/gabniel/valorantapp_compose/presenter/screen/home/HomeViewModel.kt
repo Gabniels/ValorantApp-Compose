@@ -16,8 +16,8 @@ class HomeViewModel @Inject constructor(
     private val agentUseCase: AgentUseCase,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(HomeUiState())
-    val uiState get() = _uiState.asStateFlow()
+    var uiState = MutableStateFlow(HomeUiState())
+        private set
 
     init {
         getAllAgent()
@@ -29,7 +29,7 @@ class HomeViewModel @Inject constructor(
                 when (response) {
                     is Resource.Success -> {
                         val data = response.data
-                        _uiState.update { state ->
+                        uiState.update { state ->
                             state.copy(
                                 isLoading = false,
                                 agents = data ?: emptyList()
@@ -37,7 +37,7 @@ class HomeViewModel @Inject constructor(
                         }
                     }
                     is Resource.Error -> {
-                        _uiState.update { state ->
+                        uiState.update { state ->
                             state.copy(
                                 isLoading = false,
                                 isError = true,
@@ -47,7 +47,7 @@ class HomeViewModel @Inject constructor(
                         }
                     }
                     is Resource.Loading -> {
-                        _uiState.update { state ->
+                        uiState.update { state ->
                             state.copy(
                                 isLoading = true,
                                 isError = false,
