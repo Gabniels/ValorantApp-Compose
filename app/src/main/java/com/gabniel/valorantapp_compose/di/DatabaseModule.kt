@@ -4,7 +4,8 @@ import android.app.Application
 import androidx.room.Room
 import com.gabniel.valorantapp_compose.data.db.AgentDao
 import com.gabniel.valorantapp_compose.data.db.AgentDatabase
-import com.gabniel.valorantapp_compose.data.db.LocalDataSource
+import com.gabniel.valorantapp_compose.data.db.FavoriteAgentDao
+import com.gabniel.valorantapp_compose.data.source.agent.AgentLocalDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,5 +32,8 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideLocalDataSource(agentDao: AgentDao) = LocalDataSource(agentDao)
+    fun provideFavoriteAgentDao(database: AgentDatabase): FavoriteAgentDao {
+        return database.favoriteAgentDao()
+    }
+
 }
