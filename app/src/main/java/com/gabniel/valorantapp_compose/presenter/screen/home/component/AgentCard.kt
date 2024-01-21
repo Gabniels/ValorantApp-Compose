@@ -79,12 +79,14 @@ fun AgentCard(
                             )
                         )
                     )
-                    AsyncImage(model = item.displayIcon,
+                    AsyncImage(
+                        model = item.displayIcon,
                         contentDescription = "",
                         contentScale = ContentScale.Fit,
                         modifier = Modifier.clickable {
                             favoriteAgentViewModel.insertFavoriteAgent(mapping(item))
-                        })
+                        }
+                    )
                 }
 
                 Spacer(modifier = Modifier.height(8.dp))
@@ -101,13 +103,12 @@ fun AgentCard(
 
 fun mapping(item: AgentModel): FavoriteAgentEntity {
     return FavoriteAgentEntity(
-        0,
-        item.uuid,
-        item.displayName,
-        item.description,
-        item.displayIcon,
-        item.fullPortrait,
-        item.background
+        uuid = item.uuid,
+        displayName = item.displayName,
+        description = item.description,
+        displayIcon = item.displayIcon,
+        fullPortrait = item.fullPortrait,
+        background = item.background
     )
 }
 
