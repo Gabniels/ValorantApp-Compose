@@ -15,17 +15,16 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.gabniel.valorantapp_compose.R
 import com.gabniel.valorantapp_compose.presenter.screen.favorite.component.AgentGrid
-import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 
 @Composable
 fun FavoriteScreen(
+    state: FavoriteUiState,
     navigateBack: () -> Unit,
 ) {
-    FavoriteContent(navigateBack)
+    FavoriteContent(state = state, navigateBack = navigateBack)
 }
 
 // test
@@ -33,10 +32,9 @@ fun FavoriteScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FavoriteContent(
+    state: FavoriteUiState,
     navigateBack: () -> Unit,
 ) {
-    val items = (1..15).toList()
-
     Scaffold {
         Column(
             modifier = Modifier
@@ -53,16 +51,9 @@ fun FavoriteContent(
                     .clickable { navigateBack() }
             )
             Spacer(modifier = Modifier.height(16.dp))
-            AgentGrid(items = items)
+            if (state.agents.isNotEmpty()) {
+                AgentGrid(items = state.agents)
+            }
         }
-    }
-}
-
-// test
-@Preview
-@Composable
-fun FavoritePreview() {
-    ValorantAppComposeTheme {
-        FavoriteContent {}
     }
 }

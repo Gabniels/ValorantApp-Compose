@@ -1,6 +1,5 @@
 package com.gabniel.valorantapp_compose.presenter.screen.favorite.component
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
@@ -16,19 +15,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.R
-import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
+import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity
 import kotlin.random.Random
 
 @Composable
 fun AgentGrid(
-    items: List<Int>,
+    items: List<FavoriteAgentEntity>,
 ) {
     var selectedAgent by remember {
-        mutableStateOf<Int?>(null)
+        mutableStateOf<FavoriteAgentEntity?>(null)
     }
 
     LazyVerticalGrid(
@@ -36,7 +35,9 @@ fun AgentGrid(
     ) {
         items(items) {
             val isSelected = it == selectedAgent
-            AgentGridItem(isSelected = isSelected,
+            AgentGridItem(
+                item = it,
+                isSelected = isSelected,
                 selected = {
                     selectedAgent = if (isSelected) null else it
                 }
@@ -47,6 +48,7 @@ fun AgentGrid(
 
 @Composable
 fun AgentGridItem(
+    item: FavoriteAgentEntity,
     isSelected: Boolean,
     selected: () -> Unit,
 ) {
@@ -56,9 +58,12 @@ fun AgentGridItem(
         )
     }
 
-    Image(
-        painter = painterResource(id = R.drawable.valorant_logo),
-        contentDescription = "logo image",
+    AsyncImage(
+        model =
+        if (item.displayIcon?.isNotEmpty() == true) item.displayIcon
+        else R.drawable.valorant_logo,
+        contentDescription = "",
+        contentScale = ContentScale.Fit,
         modifier = Modifier
             .padding(4.dp)
             .clickable {
@@ -72,13 +77,4 @@ fun AgentGridItem(
             )
             .padding(8.dp)
     )
-}
-
-// test
-@Preview(showBackground = true)
-@Composable
-fun AgentGridPreview() {
-    ValorantAppComposeTheme {
-        AgentGrid((1..10).toList())
-    }
 }

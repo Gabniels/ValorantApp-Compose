@@ -5,6 +5,7 @@ import com.gabniel.valorantapp_compose.domain.repository.favorite_agent.Favorite
 import com.gabniel.valorantapp_compose.domain.usecase.agent.AgentUseCase
 import com.gabniel.valorantapp_compose.domain.usecase.agent.GetAllAgentUseCase
 import com.gabniel.valorantapp_compose.domain.usecase.favorite_agent.FavoriteAgentUseCase
+import com.gabniel.valorantapp_compose.domain.usecase.favorite_agent.GetAllFavoriteAgentUseCase
 import com.gabniel.valorantapp_compose.domain.usecase.favorite_agent.InsertFavoriteAgentUseCase
 import dagger.Module
 import dagger.Provides
@@ -27,7 +28,8 @@ object UseCaseModule {
     fun provideFavoriteAgentUseCase(
         favoriteAgentRepository: FavoriteAgentRepository,
     ) = FavoriteAgentUseCase(
-        insertFavoriteAgentUseCase = InsertFavoriteAgentUseCase(favoriteAgentRepository)
+        insertFavoriteAgentUseCase = InsertFavoriteAgentUseCase(favoriteAgentRepository),
+        getAllFavoriteAgentUseCase = GetAllFavoriteAgentUseCase(favoriteAgentRepository)
     )
 
 }

@@ -32,9 +32,9 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.R
-import com.gabniel.valorantapp_compose.data.network.AgentEntity
 import com.gabniel.valorantapp_compose.data.network.AgentModel
 import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity
+import com.gabniel.valorantapp_compose.presenter.screen.favorite.FavoriteAgentViewModel
 import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 
 @Composable

@@ -7,10 +7,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.gabniel.valorantapp_compose.presenter.screen.favorite.FavoriteAgentViewModel
 import com.gabniel.valorantapp_compose.presenter.screen.favorite.FavoriteScreen
 import com.gabniel.valorantapp_compose.presenter.screen.home.HomeScreen
 import com.gabniel.valorantapp_compose.presenter.screen.home.HomeViewModel
-import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteAgentViewModel
 
 @Composable
 fun AppNavigation(
@@ -23,12 +23,19 @@ fun AppNavigation(
         composable(route = Routes.Home.route) {
             val viewModel: HomeViewModel = hiltViewModel()
             val state by viewModel.uiState.collectAsState()
-            HomeScreen(state = state) {
+            val favoriteAgentViewModel: FavoriteAgentViewModel = hiltViewModel()
+            val favoriteState by favoriteAgentViewModel.getData.collectAsState()
+            HomeScreen(
+                state = state,
+                favoriteState = favoriteState
+            ) {
                 navHostController.navigate(Routes.Favorite.route)
             }
         }
         composable(route = Routes.Favorite.route) {
-            FavoriteScreen {
+            val viewModel: FavoriteAgentViewModel = hiltViewModel()
+            val state by viewModel.getData.collectAsState()
+            FavoriteScreen(state = state) {
                 navHostController.popBackStack()
             }
         }

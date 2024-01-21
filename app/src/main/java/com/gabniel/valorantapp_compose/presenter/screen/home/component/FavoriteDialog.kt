@@ -35,10 +35,12 @@ import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeThem
 
 @Composable
 fun FavoriteDialog(
+    sizeItem: Int,
     isVisible: Boolean,
     navigateToFavorite: () -> Unit,
 ) {
     FavoriteDialogContent(
+        sizeItem = sizeItem,
         isVisible = isVisible,
         navigateToFavorite = { navigateToFavorite() }
     )
@@ -46,6 +48,7 @@ fun FavoriteDialog(
 
 @Composable
 fun FavoriteDialogContent(
+    sizeItem: Int,
     isVisible: Boolean,
     navigateToFavorite: () -> Unit,
 ) {
@@ -85,7 +88,10 @@ fun FavoriteDialogContent(
                 )
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = stringResource(R.string.favorite_is_empty),
+                    text = if (sizeItem != 0) stringResource(
+                        R.string.your_favorite_is,
+                        sizeItem
+                    ) else stringResource(R.string.favorite_is_empty),
                     style = MaterialTheme.typography.bodySmall.copy(
                         color = Color.White
                     )
@@ -100,6 +106,6 @@ fun FavoriteDialogContent(
 @Composable
 fun favoriteDialogPreview() {
     ValorantAppComposeTheme {
-        FavoriteDialogContent(true, {})
+        FavoriteDialogContent(2, true, {})
     }
 }

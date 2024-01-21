@@ -22,10 +22,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gabniel.valorantapp_compose.presenter.components.LoadingIcon
+import com.gabniel.valorantapp_compose.presenter.screen.favorite.FavoriteUiState
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentPager
-import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteAgentViewModel
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteDialog
 import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 import kotlinx.coroutines.delay
@@ -34,6 +33,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun HomeScreen(
     state: HomeUiState,
+    favoriteState: FavoriteUiState,
     navigateToFavorite: () -> Unit,
 ) {
     var stateFavorite by remember { mutableStateOf(false) }
@@ -61,6 +61,7 @@ fun HomeScreen(
                     items = state.agents,
                 )
                 FavoriteDialog(
+                    favoriteState.agents.size,
                     isVisible = stateFavorite,
                     navigateToFavorite = {
                         navigateToFavorite()
