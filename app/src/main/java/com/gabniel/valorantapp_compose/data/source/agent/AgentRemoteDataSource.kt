@@ -1,12 +1,15 @@
-package com.gabniel.valorantapp_compose.data.network
+package com.gabniel.valorantapp_compose.data.source.agent
 
+import com.gabniel.valorantapp_compose.data.network.AgentResponse
+import com.gabniel.valorantapp_compose.data.network.ApiResponse
+import com.gabniel.valorantapp_compose.data.network.ApiService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class RemoteDataSource @Inject constructor(
+class AgentRemoteDataSource @Inject constructor(
     private val apiService: ApiService,
 ) {
     fun getAllAgent(): Flow<ApiResponse<AgentResponse>> {

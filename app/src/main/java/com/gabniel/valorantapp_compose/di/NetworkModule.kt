@@ -2,13 +2,13 @@ package com.gabniel.valorantapp_compose.di
 
 import android.annotation.SuppressLint
 import com.gabniel.valorantapp_compose.BuildConfig
-import com.gabniel.valorantapp_compose.data.db.LocalDataSource
+import com.gabniel.valorantapp_compose.data.source.agent.AgentLocalDataSource
 import com.gabniel.valorantapp_compose.data.network.ApiService
-import com.gabniel.valorantapp_compose.data.network.RemoteDataSource
-import com.gabniel.valorantapp_compose.domain.repository.AgentRepository
-import com.gabniel.valorantapp_compose.domain.repository.AgentRepositoryImpl
-import com.gabniel.valorantapp_compose.domain.usecase.AgentUseCase
-import com.gabniel.valorantapp_compose.domain.usecase.GetAllAgentUseCase
+import com.gabniel.valorantapp_compose.data.source.agent.AgentRemoteDataSource
+import com.gabniel.valorantapp_compose.domain.repository.agent.AgentRepository
+import com.gabniel.valorantapp_compose.domain.repository.agent.AgentRepositoryImpl
+import com.gabniel.valorantapp_compose.domain.usecase.agent.AgentUseCase
+import com.gabniel.valorantapp_compose.domain.usecase.agent.GetAllAgentUseCase
 import com.gabniel.valorantapp_compose.utils.AppExecutors
 import dagger.Module
 import dagger.Provides
@@ -44,7 +44,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(apiService: ApiService) = RemoteDataSource(apiService)
+    fun provideRemoteDataSource(apiService: ApiService) = AgentRemoteDataSource(apiService)
 
     @SuppressLint("VisibleForTests")
     @Provides
@@ -54,22 +54,4 @@ object NetworkModule {
         Executors.newFixedThreadPool(3),
         AppExecutors.MainThreadExecutor()
     )
-
-    @Provides
-    @Singleton
-    fun provideRepository(
-        remoteDataSource: RemoteDataSource,
-        localDataSource: LocalDataSource,
-        appExecutors: AppExecutors,
-    ): AgentRepository =
-        AgentRepositoryImpl(
-            localDataSource = localDataSource,
-            remoteDataSource = remoteDataSource,
-        )
-
-    @Provides
-    @Singleton
-    fun provideUseCase(
-        agentRepository: AgentRepository,
-    ) = AgentUseCase(getAllAgentUseCase = GetAllAgentUseCase(agentRepository))
 }

@@ -1,10 +1,11 @@
-package com.gabniel.valorantapp_compose.data.db
+package com.gabniel.valorantapp_compose.data.source.agent
 
+import com.gabniel.valorantapp_compose.data.db.AgentDao
 import com.gabniel.valorantapp_compose.data.network.AgentEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class LocalDataSource @Inject constructor(
+class AgentLocalDataSource @Inject constructor(
     private val agentDao: AgentDao,
 ) {
     fun getAllAgent(): Flow<List<AgentEntity>> = agentDao.getAllAgent()

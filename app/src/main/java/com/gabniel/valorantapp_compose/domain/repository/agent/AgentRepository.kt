@@ -1,4 +1,4 @@
-package com.gabniel.valorantapp_compose.domain.repository
+package com.gabniel.valorantapp_compose.domain.repository.agent
 
 import com.gabniel.valorantapp_compose.data.Resource
 import com.gabniel.valorantapp_compose.data.network.AgentModel

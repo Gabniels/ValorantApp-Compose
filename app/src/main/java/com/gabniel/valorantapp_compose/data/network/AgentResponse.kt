@@ -68,6 +68,36 @@ data class AgentEntity(
     }
 }
 
+@Entity(tableName = "favorite_agent")
+data class FavoriteAgentEntity(
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = 0,
+    val uuid: String,
+    val displayName: String?,
+    val description: String?,
+    val displayIcon: String?,
+    val fullPortrait: String?,
+    val background: String?,
+) {
+    companion object {
+        fun transformToDomain(dataList: List<FavoriteAgentEntity>): List<AgentModel> {
+            val agentList = ArrayList<AgentModel>()
+            dataList.map {
+                val agent = AgentModel(
+                    uuid = it.uuid,
+                    displayName = it.displayName,
+                    description = it.description,
+                    displayIcon = it.displayIcon,
+                    fullPortrait = it.fullPortrait,
+                    background = it.background,
+                    backgroundGradientColors = emptyList()
+                )
+                agentList.add(agent)
+            }
+            return agentList
+        }
+    }
+}
 data class AgentItem(
     val uuid: String,
     val displayName: String?,

@@ -22,8 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gabniel.valorantapp_compose.presenter.components.LoadingIcon
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentPager
+import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteAgentViewModel
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteDialog
 import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 import kotlinx.coroutines.delay
@@ -91,10 +93,10 @@ fun HomePreview() {
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.primary
         ) {
-            HomeScreen(
-                state = HomeUiState(),
-                navigateToFavorite = {},
-            )
+//            HomeScreen(
+//                state = HomeUiState(),
+//                navigateToFavorite = {},
+//            )
         }
     }
 }

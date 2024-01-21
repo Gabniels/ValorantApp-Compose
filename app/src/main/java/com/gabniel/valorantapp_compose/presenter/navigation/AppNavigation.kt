@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import com.gabniel.valorantapp_compose.presenter.screen.favorite.FavoriteScreen
 import com.gabniel.valorantapp_compose.presenter.screen.home.HomeScreen
 import com.gabniel.valorantapp_compose.presenter.screen.home.HomeViewModel
+import com.gabniel.valorantapp_compose.presenter.screen.home.component.FavoriteAgentViewModel
 
 @Composable
 fun AppNavigation(
