@@ -98,6 +98,7 @@ data class FavoriteAgentEntity(
         }
     }
 }
+
 data class AgentItem(
     val uuid: String,
     val displayName: String?,
