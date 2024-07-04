@@ -6,6 +6,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -14,6 +15,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -23,28 +26,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.R
 import com.gabniel.valorantapp_compose.data.network.AgentModel
 import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity
-import com.gabniel.valorantapp_compose.presenter.screen.favorite.FavoriteAgentViewModel
+import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity.Companion.mapping
 import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 
 @Composable
 fun AgentCard(
     item: AgentModel,
     isVisible: Boolean,
+    onAddedToFavorite: (FavoriteAgentEntity) -> Unit,
 ) {
-
-    val favoriteAgentViewModel: FavoriteAgentViewModel = hiltViewModel()
-
     AnimatedVisibility(
         visible = isVisible,
         enter = fadeIn(animationSpec = tween(durationMillis = 1000)) + slideInVertically(),
@@ -53,8 +54,9 @@ fun AgentCard(
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp), colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF8C9EFF).copy(alpha = 0.7f)
+                .padding(16.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = Color(0xFF272727).copy(alpha = 0.8f)
             )
         ) {
             Column(
@@ -68,7 +70,10 @@ fun AgentCard(
                     contentScale = ContentScale.Fit,
                 )
                 Spacer(modifier = Modifier.height(24.dp))
-                Row {
+                Row(
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
                     Text(
                         text = item.displayName.toString(),
                         style = MaterialTheme.typography.headlineSmall.copy(
@@ -79,16 +84,17 @@ fun AgentCard(
                             )
                         )
                     )
-                    AsyncImage(
-                        model = item.displayIcon,
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Image(
+                        painter = painterResource(id = R.drawable.icon_bookmarked),
                         contentDescription = "",
-                        contentScale = ContentScale.Fit,
-                        modifier = Modifier.clickable {
-                            favoriteAgentViewModel.insertFavoriteAgent(mapping(item))
-                        }
+                        modifier = Modifier
+                            .size(32.dp)
+                            .clickable {
+                                onAddedToFavorite(mapping(item))
+                            }
                     )
                 }
-
                 Spacer(modifier = Modifier.height(8.dp))
                 Text(
                     text = item.description.toString(),
@@ -101,32 +107,22 @@ fun AgentCard(
     }
 }
 
-fun mapping(item: AgentModel): FavoriteAgentEntity {
-    return FavoriteAgentEntity(
-        uuid = item.uuid,
-        displayName = item.displayName,
-        description = item.description,
-        displayIcon = item.displayIcon,
-        fullPortrait = item.fullPortrait,
-        background = item.background
-    )
-}
-
-@Preview
+@Preview(showBackground = true)
 @Composable
 fun AgentCardPreview() {
     ValorantAppComposeTheme {
         AgentCard(
             item = AgentModel(
-                uuid = "",
+                uuid = "e370fa57-4757-3604-3648-499e1f642d3f",
                 displayName = "Jetpack Compose",
                 description = "Jetpack Compose is ...",
-                displayIcon = null,
-                fullPortrait = null,
-                background = "",
+                displayIcon = "https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/displayicon.png",
+                fullPortrait = "https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/fullportrait.png",
+                background = "https://media.valorant-api.com/agents/e370fa57-4757-3604-3648-499e1f642d3f/background.png",
                 emptyList()
             ),
             isVisible = true,
+            onAddedToFavorite = {}
         )
     }
 }

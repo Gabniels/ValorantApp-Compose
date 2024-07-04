@@ -17,13 +17,17 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.R
 import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity
+import com.gabniel.valorantapp_compose.presenter.screen.favorite.FavoriteAgentViewModel
 import kotlin.random.Random
 
 @Composable
 fun AgentGrid(
+    modifier: Modifier = Modifier,
+    onClicked: (FavoriteAgentEntity) -> Unit,
     items: List<FavoriteAgentEntity>,
 ) {
     var selectedAgent by remember {
@@ -31,6 +35,7 @@ fun AgentGrid(
     }
 
     LazyVerticalGrid(
+        modifier = modifier,
         columns = GridCells.Fixed(4)
     ) {
         items(items) {
@@ -40,6 +45,7 @@ fun AgentGrid(
                 isSelected = isSelected,
                 selected = {
                     selectedAgent = if (isSelected) null else it
+                    onClicked(it)
                 }
             )
         }

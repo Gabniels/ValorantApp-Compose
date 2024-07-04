@@ -15,6 +15,12 @@ class FavoriteAgentViewModel @Inject constructor(
     private val favoriteAgentUseCase: FavoriteAgentUseCase,
 ) : ViewModel() {
 
+    fun deleteFavoriteAgent(uuid: String){
+        viewModelScope.launch {
+            favoriteAgentUseCase.deleteFavoriteAgentUseCase.invoke(uuid)
+        }
+    }
+
     fun insertFavoriteAgent(agent: FavoriteAgentEntity) {
         viewModelScope.launch {
             favoriteAgentUseCase.insertFavoriteAgentUseCase.invoke(agent)

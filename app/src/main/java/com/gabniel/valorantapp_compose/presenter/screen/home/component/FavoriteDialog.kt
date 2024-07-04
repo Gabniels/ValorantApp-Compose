@@ -64,7 +64,7 @@ fun FavoriteDialogContent(
                     navigateToFavorite()
                 },
             colors = CardDefaults.cardColors(
-                containerColor = Color(0xFF272727).copy(alpha = 0.5f)
+                containerColor = Color(0xFF272727).copy(alpha = 0.8f)
             )
         ) {
             Row(
@@ -106,6 +106,6 @@ fun FavoriteDialogContent(
 @Composable
 fun favoriteDialogPreview() {
     ValorantAppComposeTheme {
-        FavoriteDialogContent(2, true, {})
+        FavoriteDialogContent(2, true) {}
     }
 }

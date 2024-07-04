@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity
 import com.gabniel.valorantapp_compose.presenter.components.LoadingIcon
 import com.gabniel.valorantapp_compose.presenter.screen.favorite.FavoriteUiState
 import com.gabniel.valorantapp_compose.presenter.screen.home.component.AgentPager
@@ -35,6 +36,7 @@ fun HomeScreen(
     state: HomeUiState,
     favoriteState: FavoriteUiState,
     navigateToFavorite: () -> Unit,
+    onAddedToFavorite: (FavoriteAgentEntity) -> Unit,
 ) {
     var stateFavorite by remember { mutableStateOf(false) }
 
@@ -59,6 +61,9 @@ fun HomeScreen(
                     modifier = Modifier.fillMaxSize(),
                     listState = rememberPagerState(),
                     items = state.agents,
+                    onAddedToFavorite = {
+                        onAddedToFavorite(it)
+                    }
                 )
                 FavoriteDialog(
                     favoriteState.agents.size,

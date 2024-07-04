@@ -20,7 +20,16 @@ class GetAllFavoriteAgentUseCase(
     }
 }
 
+class DeleteFavoriteAgentUseCase(
+    private val favoriteAgentRepository: FavoriteAgentRepository,
+){
+    suspend operator fun invoke(uuid: String){
+        return favoriteAgentRepository.deleteFavoriteAgent(uuid)
+    }
+}
+
 data class FavoriteAgentUseCase(
     val insertFavoriteAgentUseCase: InsertFavoriteAgentUseCase,
-    val getAllFavoriteAgentUseCase: GetAllFavoriteAgentUseCase
+    val getAllFavoriteAgentUseCase: GetAllFavoriteAgentUseCase,
+    val deleteFavoriteAgentUseCase: DeleteFavoriteAgentUseCase,
 )

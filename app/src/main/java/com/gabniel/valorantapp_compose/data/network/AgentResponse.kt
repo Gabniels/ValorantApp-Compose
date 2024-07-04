@@ -1,13 +1,17 @@
 package com.gabniel.valorantapp_compose.data.network
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class AgentResponse(
     val status: Int,
     val data: List<AgentItem>,
-) {
+): Parcelable {
     companion object {
+
         fun transformToEntities(agentResponse: AgentResponse): List<AgentEntity> {
             val agentList = ArrayList<AgentEntity>()
             agentResponse.data.map {
@@ -49,6 +53,7 @@ data class AgentEntity(
     val background: String?,
 ) {
     companion object {
+
         fun transformToDomain(dataList: List<AgentEntity>): List<AgentModel> {
             val agentList = ArrayList<AgentModel>()
             dataList.map {
@@ -70,8 +75,7 @@ data class AgentEntity(
 
 @Entity(tableName = "favorite_agent")
 data class FavoriteAgentEntity(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+    @PrimaryKey
     val uuid: String,
     val displayName: String?,
     val description: String?,
@@ -80,6 +84,18 @@ data class FavoriteAgentEntity(
     val background: String?,
 ) {
     companion object {
+
+        fun mapping(item: AgentModel): FavoriteAgentEntity {
+            return FavoriteAgentEntity(
+                uuid = item.uuid,
+                displayName = item.displayName,
+                description = item.description,
+                displayIcon = item.displayIcon,
+                fullPortrait = item.fullPortrait,
+                background = item.background
+            )
+        }
+
         fun transformToDomain(dataList: List<FavoriteAgentEntity>): List<AgentModel> {
             val agentList = ArrayList<AgentModel>()
             dataList.map {
@@ -99,6 +115,7 @@ data class FavoriteAgentEntity(
     }
 }
 
+ @Parcelize
 data class AgentItem(
     val uuid: String,
     val displayName: String?,
@@ -107,4 +124,4 @@ data class AgentItem(
     val fullPortrait: String?,
     val background: String?,
     val backgroundGradientColors: List<String>?,
-)
+): Parcelable

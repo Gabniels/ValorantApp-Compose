@@ -16,4 +16,6 @@ interface FavoriteAgentDao {
     @Query("SELECT * FROM favorite_agent")
     fun getAllFavoriteAgent(): Flow<List<FavoriteAgentEntity>>
 
+    @Query("DELETE FROM favorite_agent WHERE uuid = :uuid")
+    suspend fun deleteFavoriteAgent(uuid: String)
 }

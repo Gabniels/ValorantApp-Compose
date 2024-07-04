@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.data.network.AgentModel
+import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity
 import com.gabniel.valorantapp_compose.presenter.ui.theme.ValorantAppComposeTheme
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -41,6 +42,7 @@ fun AgentPager(
     modifier: Modifier,
     listState: PagerState,
     items: List<AgentModel>,
+    onAddedToFavorite: (FavoriteAgentEntity) -> Unit,
 ) {
     VerticalPager(
         modifier = modifier,
@@ -102,7 +104,13 @@ fun AgentPager(
                     contentDescription = "image agent",
                     contentScale = ContentScale.FillHeight
                 )
-                AgentCard(item = items[index], isVisible = clicked)
+                AgentCard(
+                    item = items[index],
+                    isVisible = clicked,
+                    onAddedToFavorite = { value ->
+                        onAddedToFavorite(value)
+                    }
+                )
             }
         }
     }
@@ -131,6 +139,7 @@ fun AgentPagerPreview() {
                         emptyList()
                     )
                 ),
+                {}
             )
         }
     }
