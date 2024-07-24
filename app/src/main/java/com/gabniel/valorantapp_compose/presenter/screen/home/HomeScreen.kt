@@ -75,34 +75,52 @@ fun HomeScreen(
             }
         }
         if (!state.isLoading && !state.isError) {
-            Box(
+            ErrorDialog(
                 modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = state.message ?: "",
-                    style = MaterialTheme.typography.headlineMedium.copy(
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 24.sp
-                    )
-                )
-            }
+                message = state.message
+            )
         }
+    }
+}
+
+@Composable
+fun ErrorDialog(modifier: Modifier = Modifier, message: String?) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = message ?: "",
+            style = MaterialTheme.typography.headlineMedium.copy(
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 24.sp
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+private fun ErrorDialogPreview() {
+    ValorantAppComposeTheme {
+        ErrorDialog(message = "Something went wrong")
     }
 }
 
 @Preview
 @Composable
-fun HomePreview() {
+private fun HomePreview() {
     ValorantAppComposeTheme {
         Surface(
             modifier = Modifier.fillMaxSize(),
             color = MaterialTheme.colorScheme.primary
         ) {
-//            HomeScreen(
-//                state = HomeUiState(),
-//                navigateToFavorite = {},
-//            )
+            HomeScreen(
+                state = HomeUiState(),
+                favoriteState = FavoriteUiState(),
+                navigateToFavorite = {},
+                onAddedToFavorite = {}
+            )
         }
     }
 }
