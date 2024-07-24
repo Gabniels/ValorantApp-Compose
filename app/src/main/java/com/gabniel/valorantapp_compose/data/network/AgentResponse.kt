@@ -9,7 +9,7 @@ import kotlinx.parcelize.Parcelize
 data class AgentResponse(
     val status: Int,
     val data: List<AgentItem>,
-): Parcelable {
+) : Parcelable {
     companion object {
 
         fun transformToEntities(agentResponse: AgentResponse): List<AgentEntity> {
@@ -95,27 +95,10 @@ data class FavoriteAgentEntity(
                 background = item.background
             )
         }
-
-        fun transformToDomain(dataList: List<FavoriteAgentEntity>): List<AgentModel> {
-            val agentList = ArrayList<AgentModel>()
-            dataList.map {
-                val agent = AgentModel(
-                    uuid = it.uuid,
-                    displayName = it.displayName,
-                    description = it.description,
-                    displayIcon = it.displayIcon,
-                    fullPortrait = it.fullPortrait,
-                    background = it.background,
-                    backgroundGradientColors = emptyList()
-                )
-                agentList.add(agent)
-            }
-            return agentList
-        }
     }
 }
 
- @Parcelize
+@Parcelize
 data class AgentItem(
     val uuid: String,
     val displayName: String?,
@@ -124,4 +107,4 @@ data class AgentItem(
     val fullPortrait: String?,
     val background: String?,
     val backgroundGradientColors: List<String>?,
-): Parcelable
+) : Parcelable

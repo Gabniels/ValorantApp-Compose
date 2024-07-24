@@ -2,13 +2,8 @@ package com.gabniel.valorantapp_compose.di
 
 import android.annotation.SuppressLint
 import com.gabniel.valorantapp_compose.BuildConfig
-import com.gabniel.valorantapp_compose.data.source.agent.AgentLocalDataSource
 import com.gabniel.valorantapp_compose.data.network.ApiService
 import com.gabniel.valorantapp_compose.data.source.agent.AgentRemoteDataSource
-import com.gabniel.valorantapp_compose.domain.repository.agent.AgentRepository
-import com.gabniel.valorantapp_compose.domain.repository.agent.AgentRepositoryImpl
-import com.gabniel.valorantapp_compose.domain.usecase.agent.AgentUseCase
-import com.gabniel.valorantapp_compose.domain.usecase.agent.GetAllAgentUseCase
 import com.gabniel.valorantapp_compose.utils.AppExecutors
 import dagger.Module
 import dagger.Provides

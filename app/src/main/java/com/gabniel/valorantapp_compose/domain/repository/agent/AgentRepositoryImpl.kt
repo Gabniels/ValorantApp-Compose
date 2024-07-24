@@ -2,13 +2,12 @@ package com.gabniel.valorantapp_compose.domain.repository.agent
 
 import com.gabniel.valorantapp_compose.data.NetworkBoundResource
 import com.gabniel.valorantapp_compose.data.Resource
-import com.gabniel.valorantapp_compose.data.source.agent.AgentLocalDataSource
 import com.gabniel.valorantapp_compose.data.network.AgentEntity
 import com.gabniel.valorantapp_compose.data.network.AgentModel
 import com.gabniel.valorantapp_compose.data.network.AgentResponse
 import com.gabniel.valorantapp_compose.data.network.ApiResponse
+import com.gabniel.valorantapp_compose.data.source.agent.AgentLocalDataSource
 import com.gabniel.valorantapp_compose.data.source.agent.AgentRemoteDataSource
-import com.gabniel.valorantapp_compose.domain.repository.agent.AgentRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject

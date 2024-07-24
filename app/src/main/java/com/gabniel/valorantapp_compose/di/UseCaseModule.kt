@@ -33,5 +33,4 @@ object UseCaseModule {
         getAllFavoriteAgentUseCase = GetAllFavoriteAgentUseCase(favoriteAgentRepository),
         deleteFavoriteAgentUseCase = DeleteFavoriteAgentUseCase(favoriteAgentRepository),
     )
-
 }

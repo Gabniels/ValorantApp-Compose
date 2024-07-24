@@ -1,6 +1,6 @@
 package com.gabniel.valorantapp_compose.data.source.favorite_agent
 
-import com.gabniel.valorantapp_compose.data.db.FavoriteAgentDao
+import com.gabniel.valorantapp_compose.data.local.FavoriteAgentDao
 import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

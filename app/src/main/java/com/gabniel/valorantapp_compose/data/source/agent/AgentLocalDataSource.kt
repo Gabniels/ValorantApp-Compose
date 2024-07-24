@@ -1,6 +1,6 @@
 package com.gabniel.valorantapp_compose.data.source.agent
 
-import com.gabniel.valorantapp_compose.data.db.AgentDao
+import com.gabniel.valorantapp_compose.data.local.AgentDao
 import com.gabniel.valorantapp_compose.data.network.AgentEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject

@@ -1,4 +1,4 @@
-package com.gabniel.valorantapp_compose.data.db
+package com.gabniel.valorantapp_compose.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

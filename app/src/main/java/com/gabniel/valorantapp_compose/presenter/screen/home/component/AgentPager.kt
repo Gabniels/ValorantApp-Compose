@@ -30,7 +30,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.gabniel.valorantapp_compose.data.network.AgentModel
 import com.gabniel.valorantapp_compose.data.network.FavoriteAgentEntity
@@ -138,9 +137,8 @@ fun AgentPagerPreview() {
                         background = "",
                         emptyList()
                     )
-                ),
-                {}
-            )
+                )
+            ) {}
         }
     }
 }

@@ -36,6 +36,4 @@ object RepositoryModule {
         localDataSource: FavoriteAgentLocalDataSource,
     ): FavoriteAgentRepository =
         FavoriteAgentRepositoryImpl(localDataSource = localDataSource)
-
-
 }
